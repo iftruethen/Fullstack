@@ -1,0 +1,12 @@
+note over Selain: Selain lähettää käyttäjän viestin\nlomakkeen datana palvelimelle
+Selain->Palvelin: HTTP POST: https://fullstack-exampleapp.herokuapp.com/new_note
+note over Selain: Selain lähettää GET-pyynnön palvelimelle
+Selain->Palvelin: HTTP GET: https://fullstack-exampleapp.herokuapp.com/notes
+note over Palvelin: Palvelin lähettää vastauksena\nsivun HTML-muodossa
+Palvelin-->Selain: HTML-koodi
+Selain->Palvelin: HTTP GET: https://fullstack-exampleapp.herokuapp.com/main.css
+Palvelin-->Selain: CSS-muotoilu (main.css)
+Selain->Palvelin: HTTP GET: https://fullstack-exampleapp.herokuapp.com/main.js
+Palvelin-->Selain: JavaScript-koodi (main.js)
+Selain->Palvelin: HTTP GET: https://fullstack-exampleapp.herokuapp.com/data.json
+Palvelin-->Selain: Sivun muistiinpanot json-muodossa (data.json)

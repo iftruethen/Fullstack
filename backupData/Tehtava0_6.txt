@@ -1,0 +1,2 @@
+Selain->Palvelin: HTTP POST: https://fullstack-exampleapp.herokuapp.com/new_note_spa
+note over Selain: Selain renderöi listan jatkoksi lisätyn muistiinpanon\nja POST-pyynnön myötä se siirtyi myös palvelimelle,\nminkä johdosta viesti näkyy sivun päivittämisen jälkeenkin\nsekä muille sivulla vieraileville
