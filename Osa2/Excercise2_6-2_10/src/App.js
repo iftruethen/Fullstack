@@ -13,13 +13,23 @@ const App = () => {
 
   const handleAdd = (event) => {
     event.preventDefault()
+    var unique = true
 
-    const noteObject = {
-      name: newName,
-      id: persons.length + 1
+    persons.forEach(function(item, index, array) {
+      if (item.name === newName) {
+        alert(`${newName} is already added to phonebook`)
+        unique = false
+      }
+    })
+
+    if (unique) {
+      const noteObject = {
+        name: newName,
+        id: persons.length + 1
+      }
+
+      setPersons(persons.concat(noteObject))
     }
-
-    setPersons(persons.concat(noteObject))
     setNewName('')
   }
 
