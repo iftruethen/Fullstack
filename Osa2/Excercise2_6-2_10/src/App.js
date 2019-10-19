@@ -1,4 +1,7 @@
 import React, { useState } from 'react'
+import Persons from './components/Persons'
+import Filter from './components/Filter'
+import PersonForm from './components/PersonForm'
 
 const App = () => {
   const [ persons, setPersons] = useState([
@@ -6,18 +9,14 @@ const App = () => {
     { name: 'Ada Lovelace', number: '39-44-5323523', id: 2 },
     { name: 'Dan Abramov', number: '12-43-234345', id: 3 },
     { name: 'Mary Poppendieck', number: '39-23-6423122', id: 4 }
-  ]) 
+  ])
+
   const [ newName, setNewName ] = useState('')
   const [ newNumber, setNewNumber ] = useState('')
   const [ searchWord, setNewSearchWord ] = useState('')
   const [ showAll, setShowAll ] = useState(true)
 
-  const nameFilter = showAll
-    ? persons
-    : persons.filter(person => person.name.toLowerCase().includes(searchWord))
-    console.log({searchWord})
-
-  const hanleSearchWordChange = (event) => {
+  const handleSearchWordChange = (event) => {
     setNewSearchWord(event.target.value)
     console.log(event.target.value.length, event.target.value)
 
@@ -67,24 +66,30 @@ const App = () => {
     <div>
       <h2>Phonebook</h2>
 
-      <div>
-        filter shown with <input value={searchWord} onChange={hanleSearchWordChange} />
-      </div>
+      <Filter 
+        value={searchWord}
+        handleSearchWordChange={handleSearchWordChange}
+      />
 
-      <h2>add a new</h2>
-      <form onSubmit={handleAdd}>
-        <div>
-          name: <input value={newName} onChange={handleNameChange} />
-        </div>
-        <div>
-          number: <input value={newNumber} onChange={handleNumberChange} />
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
-      <h2>Numbers</h2>
-      {nameFilter.map(person => <p key={person.id}>{person.name} {person.number}</p>)}
+      <h3>add a new</h3>
+
+      <PersonForm
+        newName={newName}
+        newNumber={newNumber}
+        onSubmit={handleAdd}
+        handleNameChange={handleNameChange}
+        handleNumberChange={handleNumberChange}
+        handleAdd={handleAdd}
+      />
+
+      <h3>Numbers</h3>
+
+      <Persons 
+        persons={persons}
+        showAll={showAll}
+        searchWord={searchWord}
+      />
+
     </div>
   )
 
