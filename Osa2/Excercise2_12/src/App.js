@@ -4,15 +4,16 @@ import axios from 'axios'
 const App = () => {
   const [ countries,setCountries ] = useState([])
   const [ showAll, setShowAll ] = useState(false)
-  const [ searchWord, setSearchWord ] = useState('')
+  const [ searchWord, setSearchWord ] = useState('')
   const [ weatherData, setWeatherData ] = useState([])
+  var showed = ''
 
   useEffect(() => {
     axios
       .get('https://restcountries.eu/rest/v2/all')
       .then(response => setCountries(response.data))
     axios
-      .get('http://api.weatherstack.com/current?access_key=4cf035647c4a0a31ae72f44ebb1aab2f&query='.concat(searchWord))
+      .get('http://api.weatherstack.com/current?access_key=4cf035647c4a0a31ae72f44ebb1aab2f&query='.concat(showed))
       .then(response => setWeatherData(response.data))
   }, [searchWord])
 
@@ -65,6 +66,8 @@ const App = () => {
       )
     } else if (countriesToShow.length === 1) {
       const match = countriesToShow[0]
+      showed = match.capital
+      console.log(showed)
       return(
         renderCountry({match})
       )
