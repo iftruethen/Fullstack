@@ -12,8 +12,25 @@ const App = () => {
       .then(response => setCountries(response.data))
   }, [])
 
+  const RenderCountry = ({match}) => {
+    return(
+      <div>
+        <h2>{match.name}</h2>
+        <p>
+          capital {match.capital} <br/>
+          population {match.population}
+        </p>
+        <h3>languages</h3>
+        <ul>
+          {match.languages.map(language => <li>{language.name}</li>)}
+        </ul>
+        <img src={match.flag} width="10%" height="10%"></img>
+      </div>
+    )
+  }
+
   const renderer = () => {
-    const countriesToShow = showAll
+    var countriesToShow = showAll
     ? countries
     : countries.filter(country => country.name.toLowerCase().includes(searchWord))
     console.log({countriesToShow})
@@ -33,23 +50,12 @@ const App = () => {
     } else if (countriesToShow.length === 1) {
       const match = countriesToShow[0]
       return(
-        <div>
-          <h2>{match.name}</h2>
-          <p>
-            capital {match.capital} <br/>
-            population {match.population}
-          </p>
-          <h3>languages</h3>
-          <ul>
-            {match.languages.map(language => <li>{language.name}</li>)}
-          </ul>
-          <img src={match.flag} width="10%" height="10%"></img>
-        </div>
+        RenderCountry({match})
       )
     } else {
       return(
         <div>
-          {countriesToShow.map(country => <p key={country.numericCode}>{country.name}</p> )}
+          {countriesToShow.map(match => <p key={match.numericCode}>{match.name}<button onClick={() => setSearchWord(match.name.toLowerCase())}>show</button></p> )}
         </div>
       )
     }
